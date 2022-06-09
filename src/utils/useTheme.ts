@@ -1,19 +1,12 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { ThemeContext } from "./ThemeContext";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 export type Theme = "light" | "dark";
+export type Response<Type> = [Type, Dispatch<SetStateAction<Type>>];
 
-type Response = [Theme, Dispatch<SetStateAction<Theme>>];
-
-export function useTheme(): Response {
-  const currentTheme = useContext(ThemeContext);
-  const [theme, setTheme] = useState<Theme>(currentTheme);
+export function useTheme(): Response<Theme> {
+  const [theme, setTheme] = useState<Theme>(
+    (localStorage.getItem("theme") as Theme) || "light"
+  );
 
   useEffect(() => {
     localStorage.setItem("theme", theme);

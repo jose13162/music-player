@@ -1,8 +1,8 @@
 import { globalCss, styled } from "./stitches.config";
 import { Navigation } from "./components/Navigation";
-import { Player } from "./components/Player";
-import { useTheme } from "./utils/useTheme";
-import { ThemeContext } from "./utils/ThemeContext";
+import { MusicList } from "./components/MusicList";
+import { createContext } from "react";
+import { Response, Theme, useTheme } from "./utils/useTheme";
 
 const globalStyles = globalCss({
   "*": {
@@ -23,18 +23,20 @@ const Container = styled("div", {
   gridTemplateRows: "max-content 1fr",
 });
 
+export const ThemeContext = createContext<Response<Theme>>(["light", () => {}]);
+
 function App() {
   globalStyles();
 
-  const [theme] = useTheme();
+  const [theme, setTheme] = useTheme();
 
   return (
-    <Container>
-      <ThemeContext.Provider value={theme}>
+    <ThemeContext.Provider value={[theme, setTheme]}>
+      <Container>
         <Navigation />
-        <Player />
-      </ThemeContext.Provider>
-    </Container>
+        <MusicList />
+      </Container>
+    </ThemeContext.Provider>
   );
 }
 

@@ -1,8 +1,8 @@
 import { Switch as SwitchPrimitive } from "@radix-ui/react-switch";
 import { styled } from "@stitches/react";
 import { ButtonHTMLAttributes, useContext } from "react";
+import { ThemeContext } from "../App";
 import { darkTheme, lightTheme, theme } from "../stitches.config";
-import { ThemeContext } from "../utils/ThemeContext";
 
 const StyledThemeSwitch = styled(SwitchPrimitive, {
   position: "relative",
@@ -36,15 +36,21 @@ const StyledThemeSwitch = styled(SwitchPrimitive, {
     },
   },
   "&.light": {
-    background: lightTheme.colors.$bgColorSecondary.value,
+    background: lightTheme.colors.$bgColor.value,
     "&:hover": {
-      background: lightTheme.colors.$bgColorSecondaryDarker.value,
+      background: lightTheme.colors.$bgColorDarker.value,
     },
   },
 });
 
 export function ThemeSwitch(props: ButtonHTMLAttributes<HTMLButtonElement>) {
-  const theme = useContext(ThemeContext);
+  const [theme, setTheme] = useContext(ThemeContext)
 
-  return <StyledThemeSwitch {...props} className={theme}></StyledThemeSwitch>;
+  function toggleTheme() {
+    setTheme(theme === "light" ? "dark" : "light");
+  }
+
+  return (
+    <StyledThemeSwitch {...props} className={theme} onClick={toggleTheme} />
+  );
 }

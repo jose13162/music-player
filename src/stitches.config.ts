@@ -15,8 +15,9 @@ export const { styled, globalCss, createTheme, theme } = createStitches({
 
 export const darkTheme = createTheme({
   colors: {
-    $bgColor: "#24292d",
-    $bgColorLighter: "#323840",
+    $bgColor: "#323840",
+    $bgColorDarker: "#24292d",
+    $bgColorDarkest: "#202529",
     $bgColorSecondary: "#404852",
     $bgColorSecondaryDarker: "#425054",
   },
@@ -24,8 +25,9 @@ export const darkTheme = createTheme({
 
 export const lightTheme = createTheme({
   colors: {
-    $bgColor: "#f0f8ff",
-    $bgColorDarker: "#fff",
+    $bgColor: "#fff",
+    $bgColorDarker: "#f0f8ff",
+    $bgColorDarkest: "#d4e2e9",
     $bgColorSecondary: "#e9f5ff",
     $bgColorSecondaryDarker: "#e7f3fd",
   },

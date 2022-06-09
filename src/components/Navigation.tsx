@@ -1,7 +1,7 @@
 import { styled } from "@stitches/react";
+import { useContext } from "react";
+import { ThemeContext } from "../App";
 import { darkTheme, lightTheme, theme } from "../stitches.config";
-import { ThemeContext } from "../utils/ThemeContext";
-import { useTheme } from "../utils/useTheme";
 import { ThemeSwitch } from "./ThemeSwitch";
 
 const StyledNavigation = styled("nav", {
@@ -12,10 +12,10 @@ const StyledNavigation = styled("nav", {
   transition: theme.transitions.$theme.value,
   alignItems: "center",
   "&.dark": {
-    background: darkTheme.colors.$bgColor.value,
+    background: darkTheme.colors.$bgColorDarker.value,
   },
   "&.light": {
-    background: lightTheme.colors.$bgColor.value,
+    background: lightTheme.colors.$bgColorDarkest.value,
   },
   h2: {
     color: theme.colors.$titleColor.value,
@@ -25,18 +25,12 @@ const StyledNavigation = styled("nav", {
 });
 
 export function Navigation() {
-  const [theme, setTheme] = useTheme();
-
-  function toggleTheme() {
-    setTheme(theme === "light" ? "dark" : "light");
-  }
+  const [theme] = useContext(ThemeContext);
 
   return (
-    <ThemeContext.Provider value={theme}>
-      <StyledNavigation className={theme}>
-        <h2>Music player</h2>
-        <ThemeSwitch onClick={toggleTheme} />
-      </StyledNavigation>
-    </ThemeContext.Provider>
+    <StyledNavigation className={theme}>
+      <h2>Music player</h2>
+      <ThemeSwitch />
+    </StyledNavigation>
   );
 }
