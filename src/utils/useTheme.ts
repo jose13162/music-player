@@ -1,9 +1,9 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { StateTypings } from "./StateTypings";
 
 export type Theme = "light" | "dark";
-export type Response<Type> = [Type, Dispatch<SetStateAction<Type>>];
 
-export function useTheme(): Response<Theme> {
+export function useTheme(): StateTypings<Theme> {
   const [theme, setTheme] = useState<Theme>(
     (localStorage.getItem("theme") as Theme) || "light"
   );

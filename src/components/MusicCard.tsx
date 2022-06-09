@@ -11,23 +11,28 @@ const StyledMusicCard = styled("div", {
   padding: "1rem",
   cursor: "pointer",
   transition: theme.transitions.$theme.value,
+  h3: {
+    fontSize: "1.25rem",
+    fontWeight: 500,
+  },
+  p: {
+    fontWeight: 300,
+  },
   "&.dark": {
+    "h3, p": {
+      color: darkTheme.colors.$textColor.value,
+    },
     "&:hover": {
       background: darkTheme.colors.$bgColorSecondary.value,
     },
   },
   "&.light": {
+    "h3, p": {
+      color: lightTheme.colors.$textColor.value,
+    },
     "&:hover": {
       background: lightTheme.colors.$bgColorDarker.value,
     },
-  },
-  h3: {
-    color: theme.colors.$textColor.value,
-    fontWeight: 600,
-  },
-  p: {
-    color: theme.colors.$textColor.value,
-    fontWeight: 300,
   },
 });
 

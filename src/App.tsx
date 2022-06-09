@@ -1,8 +1,13 @@
 import { globalCss, styled } from "./stitches.config";
 import { Navigation } from "./components/Navigation";
 import { MusicList } from "./components/MusicList";
-import { createContext } from "react";
-import { Response, Theme, useTheme } from "./utils/useTheme";
+import { Player } from "./components/Player";
+import { createContext, useState } from "react";
+import { Theme, useTheme } from "./utils/useTheme";
+import { ReproductionList } from "./utils/ReproductionList";
+import { musics } from "./utils/musics";
+import { MusicInterface } from "./utils/MusicInterface";
+import { StateTypings } from "./utils/StateTypings";
 
 const globalStyles = globalCss({
   "*": {
@@ -23,19 +28,36 @@ const Container = styled("div", {
   gridTemplateRows: "max-content 1fr",
 });
 
-export const ThemeContext = createContext<Response<Theme>>(["light", () => {}]);
+const reproductionList = new ReproductionList({
+  all: musics,
+  current: undefined,
+});
+const firstMusic = reproductionList.next();
+
+export const ThemeContext = createContext<StateTypings<Theme>>([
+  "light",
+  () => {},
+]);
+export const MusicContext = createContext<StateTypings<MusicInterface>>([
+  firstMusic,
+  () => {},
+]);
 
 function App() {
   globalStyles();
 
   const [theme, setTheme] = useTheme();
+  const [current, setCurrent] = useState<MusicInterface>(firstMusic);
 
   return (
     <ThemeContext.Provider value={[theme, setTheme]}>
-      <Container>
-        <Navigation />
-        <MusicList />
-      </Container>
+      <MusicContext.Provider value={[current, setCurrent]}>
+        <Container>
+          <Navigation />
+          <MusicList />
+          <Player />
+        </Container>
+      </MusicContext.Provider>
     </ThemeContext.Provider>
   );
 }

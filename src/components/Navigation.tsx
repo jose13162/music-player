@@ -6,20 +6,22 @@ import { ThemeSwitch } from "./ThemeSwitch";
 
 const StyledNavigation = styled("nav", {
   padding: "1rem",
-  boxShadow: "0 2px 5px 0 rgba(0, 0, 0, 0.8)",
+  zIndex: 1,
   display: "grid",
   gridTemplateColumns: "1fr max-content",
   transition: theme.transitions.$theme.value,
   alignItems: "center",
   "&.dark": {
+    boxShadow: "0 2px 5px 0 rgba(0, 0, 0, 0.6)",
     background: darkTheme.colors.$bgColorDarker.value,
   },
   "&.light": {
+    boxShadow: "0 2px 5px 0 rgba(0, 0, 0, 0.3)",
     background: lightTheme.colors.$bgColorDarkest.value,
   },
   h2: {
     color: theme.colors.$titleColor.value,
-    fontWeight: 400,
+    fontWeight: 600,
     margin: 0,
   },
 });

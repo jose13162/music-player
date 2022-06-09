@@ -20,6 +20,7 @@ export const darkTheme = createTheme({
     $bgColorDarkest: "#202529",
     $bgColorSecondary: "#404852",
     $bgColorSecondaryDarker: "#425054",
+    $textColor: "#bbb",
   },
 });
 
@@ -30,5 +31,6 @@ export const lightTheme = createTheme({
     $bgColorDarkest: "#d4e2e9",
     $bgColorSecondary: "#e9f5ff",
     $bgColorSecondaryDarker: "#e7f3fd",
+    $textColor: "#555",
   },
 });
